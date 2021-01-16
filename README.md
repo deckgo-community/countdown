@@ -4,7 +4,7 @@
 [npm-badge]: https://img.shields.io/npm/v/@deckdeckgo/slide-countdown
 [npm-badge-url]: https://www.npmjs.com/package/@deckdeckgo/slide-countdown
 [npm-license]: https://img.shields.io/npm/l/@deckdeckgo/slide-countdown
-[npm-license-url]: https://github.com/deckgo/deckdeckgo/blob/master/webcomponents/slides/countdown/LICENSE
+[npm-license-url]: https://github.com/deckgo-community/countdown/blob/master/LICENSE
 
 # DeckDeckGo - Slide "Countdown"
 
@@ -22,8 +22,8 @@ It is developed with [Stencil](https://stenciljs.com).
 To develop and run this Web Component locally, proceed as following:
 
 ```
-git clone https://github.com/deckgo/deckdeckgo
-cd deckdeckgo/webcomponents/slides/countdown
+git clone https://github.com/deckgo-community/countdown
+cd countdown
 npm install
 npm run start
 ```

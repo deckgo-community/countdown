@@ -37,7 +37,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/deckgo/deckdeckgo.git"
+    "url": "git+https://github.com/deckgo-community/countdown.git"
   },
   "author": {
     "name": "Gaurav Mahto",
@@ -45,7 +45,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/deckgo/deckdeckgo"
+    "url": "https://github.com/deckgo-community/countdown"
   },
   "homepage": "https://deckdeckgo.com",
   "keywords": [
