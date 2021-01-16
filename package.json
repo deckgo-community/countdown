@@ -39,7 +39,10 @@
     "type": "git",
     "url": "git+https://github.com/deckgo/deckdeckgo.git"
   },
-  "author": "David Dal Busco",
+  "author": {
+    "name": "Gaurav Mahto",
+    "url": "https://github.com/gauravmahto"
+  },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/deckgo/deckdeckgo"

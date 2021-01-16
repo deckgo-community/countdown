@@ -30,6 +30,6 @@ npm run start
 
 ## License
 
-MIT © [David Dal Busco](mailto:david.dalbusco@outlook.com) and [Nicolas Mattia](mailto:nicolas@nmattia.com)
+MIT © [David Dal Busco](mailto:david.dalbusco@outlook.com), [Nicolas Mattia](mailto:nicolas@nmattia.com) & [Gaurav Mahto](https://github.com/gauravmahto)
 
 [deckdeckgo]: https://deckdeckgo.com
