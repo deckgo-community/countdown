@@ -27,7 +27,12 @@
       {
         "name": "title",
         "placeholder": "Display the remaining time until your presentation",
-        "types": ["h1", "h2", "h3", "section"]
+        "types": [
+          "h1",
+          "h2",
+          "h3",
+          "section"
+        ]
       }
     ]
   }
