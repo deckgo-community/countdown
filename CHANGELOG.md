@@ -1,3 +1,9 @@
+# 2.3.0 (2020-01-22)
+
+- repo moved
+- properties reflected as attributes
+- reset timer on propreties changes
+
 # 2.2.2 (2020-11-14)
 
 ### Fix
