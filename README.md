@@ -125,7 +125,7 @@ The following theming options will affect this component if set on its host or p
 | --slide-padding-end                        | 32px                                                                      | Padding right of the all slide                              |
 | --slide-padding-bottom                     | 16px                                                                      | Padding bottom of the all slide                             |
 | --slide-padding-start                      | 32px                                                                      | Padding left of the all slide                               |
-| --slide-countdown-container-padding-bottom | 64px                                                                      | The bottom padding of the displayed time container          |
+| --slide-countdown-container-padding-bottom | 8%                                                                        | The bottom padding of the displayed time container          |
 | --slide-countdown-digits-max-width         | 36em                                                                      | The max width of the container containing all digits        |
 | --slide-countdown-digits-minmax-width      | 12em                                                                      | The grid minmax value of one of the three columns of digits |
 | --slide-countdown-digits-width             | 4em                                                                       | The width of one of the (two) digits                        |

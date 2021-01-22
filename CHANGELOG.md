@@ -1,8 +1,11 @@
 # 2.3.0 (2020-01-22)
 
+### Features
+
 - repo moved
 - properties reflected as attributes
-- reset timer on propreties changes
+- reset timer on properties changes
+- default padding-bottom modified to `8%`
 
 # 2.2.2 (2020-11-14)
 

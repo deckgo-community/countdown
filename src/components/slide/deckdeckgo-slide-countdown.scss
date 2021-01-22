@@ -14,7 +14,7 @@ div.deckgo-slide {
 }
 
 div.deckgo-countdown-container {
-  padding-bottom: var(--slide-countdown-container-padding-bottom, 64px);
+  padding-bottom: var(--slide-countdown-container-padding-bottom, 8%);
 
   width: inherit;
   max-width: var(--slide-countdown-digits-max-width, 36em);
