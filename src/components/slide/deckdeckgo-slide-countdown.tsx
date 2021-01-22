@@ -14,20 +14,29 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
   @Event()
   slideDidLoad: EventEmitter<void>;
 
-  @Prop()
+  /**
+   * The amount of days before your presentations
+   */
+  @Prop({reflect: true})
   days = 0;
 
-  @Prop()
+  /**
+   *  The amount of hours before your presentations (max. 23)
+   */
+  @Prop({reflect: true})
   hours = 0;
 
-  @Prop()
+  /**
+   * The amount of minutes before your presentations (max. 59)
+   */
+  @Prop({reflect: true})
   minutes = 0;
 
   @Prop()
   seconds = 0;
 
   /**
-   * The date of your talk (format: 2021-08-27T23:25:59.000+02:00)
+   * A specific date and time until when your presentation will start (format: 2021-08-27T23:25:59.000+02:00)
    */
   @Prop({reflect: true})
   until: string;
@@ -57,7 +66,7 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
   }
 
   async disconnectedCallback() {
-    this.clearUp();
+    await this.clearUp();
   }
 
   @Method()
@@ -67,10 +76,7 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
 
   @Method()
   afterSwipe(): Promise<void> {
-    return new Promise<void>(async (resolve) => {
-      await this.clearUp();
-      resolve();
-    });
+    return this.clearUp();
   }
 
   @Method()
@@ -101,94 +107,81 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
   /**
    * @internal
    */
-  private clearUp(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      if (this.mCountdownInterval) {
-        clearInterval(this.mCountdownInterval);
+  private async clearUp() {
+    if (this.mCountdownInterval) {
+      clearInterval(this.mCountdownInterval);
 
+      this.mCountdownInterval = undefined;
+    }
+  }
+
+  /**
+   * @internal
+   */
+  private async init(): Promise<void> {
+    if (this.until && this.until !== undefined && this.until !== '') {
+      const startAt: Date = new Date(this.until);
+      const now: Date = new Date();
+
+      if (startAt && startAt.getTime() > now.getTime()) {
+        let diff: number = (startAt.getTime() - now.getTime()) / (60 * 60 * 1000);
+
+        if (diff >= 24) {
+          const diffHours: number = diff / 24;
+
+          this.mDays = diffHours >= 99 ? 99 : Math.floor(diffHours);
+          this.mHours = Math.floor((diffHours % 1) * 24);
+        } else {
+          this.mDays = 0;
+          this.mHours = Math.floor(diff);
+        }
+
+        diff = (diff % 1) * 60;
+
+        this.mMinutes = Math.floor(diff);
+
+        diff = (diff % 1) * 60;
+
+        this.mSeconds = Math.floor(diff);
+
+        this.mTotalSeconds = this.mDays * 24 * 60 * 60 + this.mHours * 60 * 60 + this.mMinutes * 60 + this.mSeconds;
+
+        return;
+      }
+    }
+
+    this.mDays = this.days;
+    this.mHours = this.hours;
+    this.mMinutes = this.minutes;
+    this.mSeconds = this.seconds;
+
+    this.mTotalSeconds = this.mDays * 24 * 60 * 60 + this.mHours * 60 * 60 + this.mMinutes * 60 + this.mSeconds;
+  }
+
+  /**
+   * @internal
+   */
+  private async startCountdown() {
+    this.mCountdownInterval = setInterval(() => {
+      if (this.mTotalSeconds > 0) {
+        --this.mSeconds;
+
+        if (this.mMinutes >= 0 && this.mSeconds < 0) {
+          this.mSeconds = 59;
+          --this.mMinutes;
+        }
+
+        if (this.mHours >= 0 && this.mMinutes < 0) {
+          this.mMinutes = 59;
+          --this.mHours;
+        }
+
+        --this.mTotalSeconds;
+      } else {
+        clearInterval(this.mCountdownInterval);
         this.mCountdownInterval = undefined;
       }
-
-      resolve();
-    });
-  }
-
-  /**
-   * @internal
-   */
-  private init(): Promise<void> {
-    return new Promise<void>(async (resolve) => {
-      if (this.until && this.until !== undefined && this.until !== '') {
-        const startAt: Date = new Date(this.until);
-        const now: Date = new Date();
-
-        if (startAt && startAt.getTime() > now.getTime()) {
-          let diff: number = (startAt.getTime() - now.getTime()) / (60 * 60 * 1000);
-
-          if (diff >= 24) {
-            const diffHours: number = diff / 24;
-
-            this.mDays = diffHours >= 99 ? 99 : Math.floor(diffHours);
-            this.mHours = Math.floor((diffHours % 1) * 24);
-          } else {
-            this.mDays = 0;
-            this.mHours = Math.floor(diff);
-          }
-
-          diff = (diff % 1) * 60;
-
-          this.mMinutes = Math.floor(diff);
-
-          diff = (diff % 1) * 60;
-
-          this.mSeconds = Math.floor(diff);
-
-          this.mTotalSeconds = this.mDays * 24 * 60 * 60 + this.mHours * 60 * 60 + this.mMinutes * 60 + this.mSeconds;
-
-          resolve();
-          return;
-        }
-      }
-
-      this.mDays = this.days;
-      this.mHours = this.hours;
-      this.mMinutes = this.minutes;
-      this.mSeconds = this.seconds;
-
-      this.mTotalSeconds = this.mDays * 24 * 60 * 60 + this.mHours * 60 * 60 + this.mMinutes * 60 + this.mSeconds;
-
-      resolve();
-    });
-  }
-
-  /**
-   * @internal
-   */
-  private startCountdown(): Promise<void> {
-    return new Promise<void>((resolve) => {
-      this.mCountdownInterval = setInterval(async () => {
-        if (this.mTotalSeconds > 0) {
-          --this.mSeconds;
-
-          if (this.mMinutes >= 0 && this.mSeconds < 0) {
-            this.mSeconds = 59;
-            --this.mMinutes;
-          }
-
-          if (this.mHours >= 0 && this.mMinutes < 0) {
-            this.mMinutes = 59;
-            --this.mHours;
-          }
-
-          --this.mTotalSeconds;
-        } else {
-          clearInterval(this.mCountdownInterval);
-          this.mCountdownInterval = undefined;
-        }
-      }, 1000);
-
-      resolve();
-    });
+    }, 1000);
   }
 
   render() {

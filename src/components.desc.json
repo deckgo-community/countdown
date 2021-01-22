@@ -3,9 +3,24 @@
     "tag": "deckgo-slide-countdown",
     "props": [
       {
+        "name": "days",
+        "type": "number",
+        "placeholder": "The amount of days before your presentations"
+      },
+      {
+        "name": "hours",
+        "type": "number",
+        "placeholder": "The amount of hours before your presentations (max. 23)"
+      },
+      {
+        "name": "minutes",
+        "type": "number",
+        "placeholder": "The amount of minutes before your presentations (max. 59)"
+      },
+      {
         "name": "until",
         "type": "string",
-        "placeholder": "The date of your talk (format: 2021-08-27T23:25:59.000+02:00)"
+        "placeholder": "A specific date and time until when your presentation will start (format: 2021-08-27T23:25:59.000+02:00)"
       }
     ],
     "slots": [

@@ -9,17 +9,26 @@ export namespace Components {
     interface DeckgoSlideCountdown {
         "afterSwipe": () => Promise<void>;
         "beforeSwipe": (_enter: boolean, _reveal: boolean) => Promise<boolean>;
+        /**
+          * The amount of days before your presentations
+         */
         "days": number;
         "hideContent": () => Promise<void>;
+        /**
+          * The amount of hours before your presentations (max. 23)
+         */
         "hours": number;
         "lazyLoadContent": () => Promise<void>;
+        /**
+          * The amount of minutes before your presentations (max. 59)
+         */
         "minutes": number;
         "revealContent": () => Promise<void>;
         "seconds": number;
         "start": () => Promise<void>;
         "stop": () => Promise<void>;
         /**
-          * The date of your talk (format: 2021-08-27T23:25:59.000+02:00)
+          * A specific date and time until when your presentation will start (format: 2021-08-27T23:25:59.000+02:00)
          */
         "until": string;
     }
@@ -37,13 +46,22 @@ declare global {
 }
 declare namespace LocalJSX {
     interface DeckgoSlideCountdown {
+        /**
+          * The amount of days before your presentations
+         */
         "days"?: number;
+        /**
+          * The amount of hours before your presentations (max. 23)
+         */
         "hours"?: number;
+        /**
+          * The amount of minutes before your presentations (max. 59)
+         */
         "minutes"?: number;
         "onSlideDidLoad"?: (event: CustomEvent<void>) => void;
         "seconds"?: number;
         /**
-          * The date of your talk (format: 2021-08-27T23:25:59.000+02:00)
+          * A specific date and time until when your presentation will start (format: 2021-08-27T23:25:59.000+02:00)
          */
         "until"?: string;
     }
