@@ -1,7 +1,7 @@
 {
   "name": "@deckdeckgo/slide-countdown",
   "version": "2.2.2",
-  "description": "The Countdown template display the remaining time until your presentation",
+  "description": "Display the remaining time until your presentation",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "es2015": "dist/esm/index.js",
@@ -29,6 +29,7 @@
     "@stencil/core": "^2.3.0",
     "@stencil/postcss": "^2.0.0",
     "@stencil/sass": "^1.4.1",
+    "@types/node": "^14.14.22",
     "autoprefixer": "^10.2.3",
     "husky": "^4.3.8",
     "prettier": "2.2.1",

@@ -1,0 +1,19 @@
+[
+  {
+    "tag": "deckgo-slide-countdown",
+    "props": [
+      {
+        "name": "until",
+        "type": "string",
+        "placeholder": "The date of your talk (format: 2021-08-27T23:25:59.000+02:00)"
+      }
+    ],
+    "slots": [
+      {
+        "name": "title",
+        "placeholder": "Display the remaining time until your presentation",
+        "types": ["h1", "h2", "h3", "section"]
+      }
+    ]
+  }
+]

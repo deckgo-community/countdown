@@ -6,7 +6,7 @@
 [npm-license]: https://img.shields.io/npm/l/@deckdeckgo/slide-countdown
 [npm-license-url]: https://github.com/deckgo-community/countdown/blob/master/LICENSE
 
-The "Countdown" slide displays a countdown until your presentation starts.
+The "Countdown" template displays a countdown until your presentation starts.
 
 It could be handy, for example when you organize a meetup, to display a countdown until the event start.
 
