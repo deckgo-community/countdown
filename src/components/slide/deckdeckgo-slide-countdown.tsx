@@ -1,4 +1,4 @@
-import {Component, Method, Prop, h, Event, EventEmitter, Host, State} from '@stencil/core';
+import {Component, Method, Prop, h, Event, EventEmitter, Host, State, Watch} from '@stencil/core';
 
 import {DeckdeckgoSlide} from '@deckdeckgo/slide-utils';
 
@@ -57,16 +57,29 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
   private mCountdownInterval: NodeJS.Timeout | undefined = undefined;
 
   async componentDidLoad() {
-    await this.clearUp();
-
     await this.init();
-    await this.startCountdown();
 
     this.slideDidLoad.emit();
   }
 
   async disconnectedCallback() {
     await this.clearUp();
+  }
+
+  private async init() {
+    await this.clearUp();
+
+    await this.initTimer();
+    await this.startCountdown();
+  }
+
+  @Watch('until')
+  @Watch('days')
+  @Watch('hours')
+  @Watch('minutes')
+  @Watch('seconds')
+  async onPropChanges() {
+    await this.init();
   }
 
   @Method()
@@ -118,7 +131,7 @@ export class DeckdeckgoSlideCountdown implements DeckdeckgoSlide {
   /**
    * @internal
    */
-  private async init(): Promise<void> {
+  private async initTimer(): Promise<void> {
     if (this.until && this.until !== undefined && this.until !== '') {
       const startAt: Date = new Date(this.until);
       const now: Date = new Date();
