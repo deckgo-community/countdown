@@ -3,10 +3,16 @@ import {JsonDocsComponent, JsonDocsProp, JsonDocsSlot} from '@stencil/core/inter
 
 import * as fs from 'fs';
 
+interface DeckDeckGoAuthor {
+  name?: string;
+  url?: string;
+}
+
 interface DeckDeckGoSlot {
   name: string;
   placeholder?: string;
   types?: string[];
+  author?: DeckDeckGoAuthor;
 }
 
 interface DeckDeckGoProp {
@@ -48,10 +54,25 @@ const parseProps = (props: JsonDocsProp[] | undefined): DeckDeckGoProp[] | undef
     });
 };
 
+const parseAuthor = (): DeckDeckGoAuthor | undefined => {
+  const packageJson = require('./package.json');
+
+  if (!packageJson?.author?.name) {
+    return undefined;
+  }
+
+  return {
+    name: packageJson.author.name,
+    ...(packageJson.author.url && {url: packageJson.author.url})
+  };
+};
+
 export const generateDesc = (docs: JsonDocs) => {
   if (!docs || !docs.components) {
     console.warn('No docs or components provided.');
   }
+
+  const author: DeckDeckGoAuthor | undefined = parseAuthor();
 
   const components = docs.components.map((cmp: JsonDocsComponent) => {
     const slots: DeckDeckGoSlot[] | undefined = parseSlots(cmp.slots);
@@ -64,6 +85,7 @@ export const generateDesc = (docs: JsonDocs) => {
 
     return {
       tag: cmp.tag,
+      ...(author && {author}),
       ...(props && {props}),
       ...(slots && {slots})
     };

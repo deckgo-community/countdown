@@ -1,6 +1,10 @@
 [
   {
     "tag": "deckgo-slide-countdown",
+    "author": {
+      "name": "Gaurav Mahto",
+      "url": "https://github.com/gauravmahto"
+    },
     "props": [
       {
         "name": "days",
